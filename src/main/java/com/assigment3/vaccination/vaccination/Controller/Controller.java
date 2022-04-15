@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,12 +22,12 @@ public class Controller {
 	@Autowired
 	VaccinationService service;
 	
-	@RequestMapping(value="/add")
-	public void addCenter() {
-		VaccinationCenter vc= new VaccinationCenter("Applo",700506,"NorthPgs",200L);
-		VaccinationCenter vc1= new VaccinationCenter("Ruby",700117,"Kolkata",150L);
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public void addCenter(@RequestBody VaccinationCenter vc ) {
+		vc.setAvailablevaccine(400L);
 		service.addCenter(vc);
-		service.addCenter(vc1);
+		System.out.println(vc);
+		
 		
 		
 	}
